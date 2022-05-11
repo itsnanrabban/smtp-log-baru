@@ -1,0 +1,96 @@
+#!/bin/bash
+# A menu driven shell script sample template 
+## ----------------------------------
+# Step #1: Define variables
+# ----------------------------------
+EDITOR=vim
+PASSWD=/etc/passwd
+RED='\033[0;41;30m'
+STD='\033[0;0;39m'
+ 
+# ----------------------------------
+# Step #2: User defined function
+# ----------------------------------
+pause(){
+  read -p "Press [Enter] key to continue..." fackEnterKey
+}
+
+whitelist(){
+		. /home/smtp-log/addnetwork.sh
+       		pause
+}
+ 
+# do something in two()
+remove(){
+		. /home/smtp-log/removenetwork.sh
+       		 pause
+}
+
+track(){
+	        . /home/smtp-log/showlogemail.sh
+        	pause
+}
+
+statistics(){
+        	. /home/smtp-log/statistics.sh
+        	pause
+}
+
+policy(){
+                . /home/smtp-log/policy.sh
+                pause
+}
+
+ 
+# function to display menus
+show_menus() {
+	clear
+	
+	echo "----------------------------"
+
+	echo "-----SMTP-BGN Main Menu-----"
+
+	echo "----------------------------"
+
+	printf "\n"
+	echo "1.  Whitelist IP Network To SMTP-BGN"
+	echo "2.  Remove IP Network To SMTP-BGN"
+        echo "3.  Track Delivery Email"
+        echo "4.  Show Statistics Email"
+	echo "5.  Policy SMTP-BGN"
+        echo "6.  Exit"
+
+}
+# read input from the keyboard and take a action
+# invoke the one() when the user select 1 from the menu option.
+# invoke the two() when the user select 2 from the menu option.
+# Exit when user the user select 3 form the menu option.
+read_options(){
+	local choice
+	read -p "Enter choice [1 - 5] : " choice
+	echo
+	case $choice in
+		1) whitelist ;;
+                2) remove ;;
+                3) track ;;
+		4) statistics ;;
+		5) policy ;;
+		6) exit 0;;
+		*) echo -e "${RED}Error...${STD}" && sleep 2
+	esac
+}
+ 
+# ----------------------------------------------
+# Step #3: Trap CTRL+C, CTRL+Z and quit singles
+# ----------------------------------------------
+trap '' SIGINT SIGQUIT SIGTSTP
+ 
+# -----------------------------------
+# Step #4: Main logic - infinite loop
+# ------------------------------------
+while true
+do
+ 
+	show_menus
+	read_options
+done

@@ -1,0 +1,33 @@
+#!/bin/bash
+
+printf "\n"
+
+echo "----------------------------"
+
+echo "-----SMTP-BGN Main Menu-----"
+
+echo "----------------------------"
+
+printf "\n"
+
+echo "1. Whitelist IP Network To SMTP-BGN"
+echo "2. Remove IP Network To SMTP-BGN"
+echo "3. Track Delivery Email"
+echo "4. Show Statistics Email"
+echo "5. Exit"
+
+printf "\n"
+
+read -p "Please Choose Your Option [1,2,3,4,5] : " doit
+
+printf "\n"
+
+case $doit in
+  1) . /home/smtp-log/addnetwork.sh ;;
+  2) . /home/smtp-log/removenetwork.sh;;
+  3) . /home/smtp-log/showlogemail.sh;;
+  4) . /home/smtp-log/statistics.sh;;
+  5) break;;
+  *) echo You Not Choose Your Choice ;;
+esac
+

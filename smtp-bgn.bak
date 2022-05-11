@@ -1,0 +1,40 @@
+#!/bin/bash
+
+printf "\n"
+
+echo "----------------------------"
+
+echo "-----SMTP-BGN Main Menu-----"
+
+echo "----------------------------"
+
+printf "\n"
+
+PS3='Please Choose Your Option [1,2,3,4,5] : '
+smtp=("Whitelist IP Network To SMTP-BGN" "Remove IP Network To SMTP-BGN" "Track Delivery Email" "Show Statistics Email" "Quit")
+select fav in "${smtp[@]}"; do
+    case $fav in
+        "Whitelist IP Network To SMTP-BGN")
+	    . /home/smtp-log/addnetwork.sh
+	    # optionally call a function or run some code here
+            ;;
+        "Remove IP Network To SMTP-BGN")
+	    . /home/smtp-log/removenetwork.sh
+	    # optionally call a function or run some code here
+            ;;
+        "Track Delivery Email")
+	    . /home/smtp-log/showlogemail.sh
+	    # optionally call a function or run some code here
+            ;;
+	"Show Statistics Email")
+            . /home/smtp-log/statistics.sh
+            # optionally call a function or run some code here
+            break
+	    ;;
+	"Quit")
+	    echo "You Requested Exit"
+	    exit
+	    ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done
